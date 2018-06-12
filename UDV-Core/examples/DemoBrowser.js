@@ -190,3 +190,7 @@ var minimap = new udvcore.MiniMapController(controls, extent, renderer);
 
 // instanciate compass controller
 var compass = new udvcore.CompassController(controls);
+
+//disable all functionalities to test document browser independantly
+document.getElementById('docCreateFromBrowser').disabled = 'disabled';
+document.getElementById('docCreateFromBrowser').style.background = "#8D8A8B";
