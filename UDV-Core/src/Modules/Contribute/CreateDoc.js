@@ -2,6 +2,7 @@ import $ from 'jquery';
 import 'alpaca';
 import 'bootstrap-datepicker'
 import './Contribute.css';
+//Do we really need a class ?
 
 export function CreateDoc(controls, view ,url){
 
@@ -29,6 +30,8 @@ export function CreateDoc(controls, view ,url){
   </div>\
   </div>\
   ';
+
+  //difficulty to dynamicaly handle file upload and preview, so the OptionsCreate is hard coded for now...
   var schema = "http://rict.liris.cnrs.fr/schemaType.json";
   var optionsCreate = "http://rict.liris.cnrs.fr/optionsCreate.json";
   var optionsCreateDur = {

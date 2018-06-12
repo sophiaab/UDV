@@ -174,6 +174,7 @@ export function Contribute(view, controls, options = {}, mode, url) {
 
 /** UPDATEBILLBOARDORIENTATION
 * called in the addFrameRequester so that billboards always face the screen
+* Everything about billboards display mode => move elsewhere
 */
 //==========================================================================
   this.updateBillboardOrientation = function updateBillboardOrientation(){
@@ -185,7 +186,6 @@ export function Contribute(view, controls, options = {}, mode, url) {
 
   // request update every active frame
   this.controls.view.addFrameRequester( MAIN_LOOP_EVENTS.AFTER_CAMERA_UPDATE,this.updateBillboardOrientation.bind(this) );
-
 
   this.setBrowserMode = function setBrowserMode(){
     this.modePlace = 1;
@@ -207,6 +207,7 @@ export function Contribute(view, controls, options = {}, mode, url) {
 }
 //HANDLEDOCCREATION
 function handleDocCreation(controls, view){
-  console.log("entering creation class");
+  console.log("entering creation class"); //do we need a class ?
+  
   var newDocCreation = new CreateDoc(controls, view);
 }

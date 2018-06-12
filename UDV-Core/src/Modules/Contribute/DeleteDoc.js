@@ -1,14 +1,9 @@
-//import './DocumentsBrowser.js';
-//import './Contribute.css';
+import './Contribute.css';
 
 export function DeleteDoc(doc, root_url) {
 
-
-  this.initialize = function initialize(){
-    this.id = doc.doc_ID;
-    this.url = root_url + "/deleteDocument/" + this.id;
-    console.log(this.url);
-  }
+  this.id = doc.doc_ID;
+  this.url = root_url + "/deleteDocument/" + this.id;
 
   this.ConfirmDeleteOneDocument = function ConfirmDeleteOneDocument(){
     if(confirm('Delete this document permanently?')){
@@ -26,7 +21,6 @@ export function DeleteDoc(doc, root_url) {
     }
   }
 
-  this.initialize();
   this.ConfirmDeleteOneDocument();
 
 }

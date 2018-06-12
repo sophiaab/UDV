@@ -1,5 +1,5 @@
 /**
-* Classes: Document Handler & Document
+* Classes: DocumentsBrowser
 * Description :
 * The Document Handler is an object holding and managing Document objects
 * It handles the display of documents in the document browser window, the central window, and billboards.
@@ -415,14 +415,13 @@ export function DocumentsBrowser(view, controls, jsonDataFromDB, options = {},ur
 
     this.handleDocDelete = function handleDocDelete(){
       console.log('doc deletion');
-      var Delete = new DeleteDoc(this.currentDoc, "lyurl");
+      var Delete = new DeleteDoc(this.currentDoc, "url"); //is it really relevant to have a 'CreateDoc class' ??
     }
 
     this.handleDocCreation = function handleDocCreation(){
       console.log("doc creation");
-      var Create = new CreateDoc(this.controls, this.view);
+      var Create = new CreateDoc(this.controls, this.view); //is it really relevant to have a 'CreateDoc class' ??
     }
-
 
     // triggers the "oriented view" of the current docIndex
     // this will display the doc image in the middle of the screen
@@ -537,7 +536,6 @@ export function DocumentsBrowser(view, controls, jsonDataFromDB, options = {},ur
     document.getElementById("docDelete").addEventListener('mousedown', this.handleDocDelete.bind(this),false);
     document.getElementById("docCreateFromBrowser").addEventListener('mousedown', this.handleDocCreation.bind(this),false);
 
-
     // setup display
     document.getElementById("docBrowserToggleBillboard").style.display = (showBillboardButton)? "block" : "none";
     document.getElementById("docBrowserWindow").style.display = (!this.docBrowserWindowIsActive)? "none" : "block";
@@ -545,10 +543,7 @@ export function DocumentsBrowser(view, controls, jsonDataFromDB, options = {},ur
     // this will trigger the initialization, after file loading is complete
     this.loadDataFromDatabase();
 
-
 }
-
-
 
 // in orientied view (focusOnDoc) this is called when the user changes the value of the opacity slider
 //=============================================================================

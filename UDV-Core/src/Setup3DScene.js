@@ -17,7 +17,7 @@ import proj4 from 'proj4';
 //=============================================================================
 export function Setup3DScene(terrainAndElevationRequest,
                              buildingServerRequest,
-                             showBuildings = false )
+                             showBuildings = true )
 {
 // Define projection that we will use (taken from https://epsg.io/3946, Proj4js section)
 proj4.defs('EPSG:3946',

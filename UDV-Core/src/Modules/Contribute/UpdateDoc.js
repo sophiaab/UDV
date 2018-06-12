@@ -2,9 +2,8 @@
 * Classe: UpdateDoc
 * Description :
 * The UpdateDoc is an object handling the update of one Document
+// Do we really need a class ?
 */
-
-import '../Documents/DocumentsHandler.js';
 
 export function UpdateDoc(doc, url) {
 
@@ -12,6 +11,7 @@ export function UpdateDoc(doc, url) {
   // The update window is displayed
   // the update form is generated using alpaca
   // the document image is shown
+  // for now, there is a bug (with jquery, I have o fix it), so the update form is handled in DocumentBrowser...
   //=========================================================================
   this.initialize = function initialize(){
 
