@@ -194,7 +194,7 @@ var minimap = new udvcore.MiniMapController(controls, extent, renderer);
 // instanciate compass controller
 var compass = new udvcore.CompassController(controls);
 
-/*
+
 //blur and disable buttons in document browser in order to test this "module" on its one
 document.getElementById('docDelete').disabled = 'disabled';
 document.getElementById('docDelete').style.background = "#8D8A8B";
@@ -202,4 +202,3 @@ document.getElementById('docUpdate').disabled = 'disabled';
 document.getElementById('docUpdate').style.background = "#8D8A8B";
 document.getElementById('docCreateFromBrowser').disabled = 'disabled';
 document.getElementById('docCreateFromBrowser').style.background = "#8D8A8B";
-*/
