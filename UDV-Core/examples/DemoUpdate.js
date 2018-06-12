@@ -126,8 +126,7 @@ var help  = new udvcore.HelpWindow({active:true});
 
 //////////// Document Handler section
 var url = "http://rict.liris.cnrs.fr/APIVilo3D/APIExtendedDocument/web/";
-//var url ="http://127.0.0.1/APIExtendedDocument/web/";
-var contri = new udvcore.Contribute(view, controls, {temporal: temporal}, mode, url);
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //// Create and configure the layout controller

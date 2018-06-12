@@ -158,7 +158,6 @@ export function DocumentsBrowser(view, controls, jsonDataFromDB, options = {},ur
     */
     //==========================================================================
     this.initialize = function initialize(docDataFromDB){
-      console.log(docDataFromDB);
         // fill the AllDocuments array with Documents objects
         // the Documents are placed in the order they are loaded, which is their line order in the csv file
         // the docIndex property is specified to be 0,1,2,3 etc... in the csv

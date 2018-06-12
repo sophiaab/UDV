@@ -6,6 +6,7 @@ export { Setup3DScene }         from './Setup3DScene';
 
 
 export { Contribute }             from './Modules/Contribute/Contribute';
+export { DocumentsBrowser}  from './Modules/Contribute/DocumentsBrowser';
 
 export { DocumentsHandler }     from './Modules/Documents/DocumentsHandler';
 
