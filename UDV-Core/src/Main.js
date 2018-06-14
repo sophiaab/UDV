@@ -5,6 +5,7 @@ export { itowns };
 export { Setup3DScene }         from './Setup3DScene';
 
 export { DocumentsBrowser }     from './Modules/Contribute/DocumentsBrowser'; //used in DemoBrowser.html
+export { Contribute }     from './Modules/Contribute/Contribute'; //used in DemoBrowser.html
 
 export { DocumentsHandler }     from './Modules/Documents/DocumentsHandler'; //used in Demo.js
 

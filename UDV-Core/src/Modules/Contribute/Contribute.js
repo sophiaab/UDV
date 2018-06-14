@@ -208,6 +208,6 @@ export function Contribute(view, controls, options = {}, mode, url) {
 //HANDLEDOCCREATION
 function handleDocCreation(controls, view){
   console.log("entering creation class"); //do we need a class ?
-  
+
   var newDocCreation = new CreateDoc(controls, view);
 }

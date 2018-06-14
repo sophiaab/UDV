@@ -2,19 +2,15 @@
 cd "$(dirname "$0")" || exit
 
 mkdir dist
-cd dist
-#git clone https://github.com/sophiaab/itowns.git
-#git clone https://github.com/jailln/itowns.git
-
-git clone https://github.com/itowns/itowns.git
-cd itowns
-git checkout example_fix_747
+pushd dist
+git clone https://github.com/jailln/itowns.git
+pushd itowns
+git checkout 3dtiles-temporal
 npm install
 npm pack
-cd ..
-cd ..
+popd
+popd
 npm install dist/itowns/itowns-2.2.0.tgz
-
 npm install
 ### The following is only needed in server mode (since in devel mode
 # npm start already takes care of that stage).
