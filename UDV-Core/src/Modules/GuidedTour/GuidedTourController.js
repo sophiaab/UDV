@@ -3,31 +3,15 @@ import './GuidedTour.css';
 import { GuidedTour }   from './GuidedTour.js';
 
 /**
-* Classes: GuidedTourController & TourStep
+* Class: GuidedTourController
 * Description :
-* The GuidedTourController is an object holding TourSteps objects
-* It handles the display of guided tours in the guided tour window, and all the
-* functionalities related to the guided tour (start, exit, next, previous...)
-* TourSteps are object with properties : index, document, text1 and text2.
-* They are the individual steps of which guided tours are made.
-*/
-
-/**
-* Constructor for GuidedTourController
-* The controller reads data from a csv file to build one or more guided tours
-* Each guided tour is a succession of "steps"
-* Each step has a document + tour text + doc text (steps are instances of the TourStep class)
-* Multiple guided tours are supported (only one tour is finished for the demo)
-* For the demo : options.preventUserFromChangingTour allows to hide the buttons for changing tour
-
-
+* The GuidedTourController is an object handling GuidedTours. It hanldes
+* the functionalities : go to next / previous guided tour, start/exit guided tour,
+* go to next / previous step of the selected guided tour.
 
 /**
  * Constructor for GuidedTourControllerClass
- * @param controls : PlanarControls instance
- * @param options : optional parameters (including TemporalController)
- * @param view :  itowns planar view
- * @param config : file holding congiguration settings
+ * @param documentController : DocumenController instance
  *
  ======================================================================
  */
@@ -37,36 +21,37 @@ export function GuidedTourController(documentController) {
 
   this.documentController = documentController; //instance of DocumentController
 
-  this.url = this.documentController.serverModel.url + this.documentController.serverModel.guidedTour;
+  //url to get guided tours
+  this.url = this.documentController.serverModel.url +
+                                  this.documentController.serverModel.guidedTour;
 
-  this.browser = this.documentController.documentBrowser;
+  this.browser = this.documentController.documentBrowser; //instance of document browser
 
-  this.guidedTours = [];
+  this.guidedTours = []; //all guided tours
 
-  this.currentTourIndex = 0;
+  this.currentTourIndex = 0;//index of the current guided tour
 
-  this.steps = [];
+  this.steps = []; //all steps of the current guided tour
 
   // the current step index of the current tour
   this.currentStepIndex = 0;
 
-  this.guidedTour;
+  this.guidedTour; //instance of GuidedTour (view)
 
+  //used for 'clean'
   this.preventUserFromChangingTour = false;
 
-
   /**
-    * initialize the controller
-    */
-    //=============================================================================
-    this.initialize = function initialize(){
+  * initialize the controller
+  */
+  //=============================================================================
+  this.initialize = function initialize(){
 
-      var guidedTourContainer = document.createElement("div");
-      guidedTourContainer.id =   this.guidedTourContainerId;
-      document.body.appendChild(guidedTourContainer);
-      this.guidedTour = new GuidedTour(guidedTourContainer, this);
-
-    }
+    var guidedTourContainer = document.createElement("div");
+    guidedTourContainer.id =   this.guidedTourContainerId;
+    document.body.appendChild(guidedTourContainer);
+    this.guidedTour = new GuidedTour(guidedTourContainer, this);
+  }
 
     /**
      * Gets the documents from a database, using filters
@@ -80,10 +65,13 @@ export function GuidedTourController(documentController) {
       this.guidedTours = JSON.parse(req.responseText);
 
     }
-
+    /**
+     * Returns the current guided tour
+     *
+     */
+    //=============================================================================
     this.getCurrentTour = function getCurrentTour(){
       if (this.guidedTours.length != 0){
-        console.log('current tour index', this.currentTourIndex)
         return this.guidedTours[this.currentTourIndex];;
       }
       else
@@ -92,6 +80,10 @@ export function GuidedTourController(documentController) {
       }
     }
 
+    /**
+     * Sets the current guided tour to the next guided tour and returns it.
+     *
+     */
     //=============================================================================
     this.getNextTour = function getNextTour(){
       if (this.currentTourIndex < this.guidedTours.length - 1 || this.guidedTours.length == 0){
@@ -100,6 +92,10 @@ export function GuidedTourController(documentController) {
       return this.getCurrentTour();
     };
 
+    /**
+     * Sets the current guided tour to the previous guided tour and returns it.
+     *
+     */
     //=============================================================================
     this.getPreviousTour = function getPreviousTour(){
       if (this.currentTourIndex > 0 || this.currentTourIndex.length == 0)
@@ -124,6 +120,11 @@ export function GuidedTourController(documentController) {
       }
     }
 
+    /**
+     * Sets the current step to the previous step and returns it.
+     *
+     */
+    //=============================================================================
     this.getPreviousStep = function getPreviousStep(){
       if (this.currentStepIndex > 0 || this.getCurrentTour().extendedDocs.length == 0)
       {
@@ -132,6 +133,11 @@ export function GuidedTourController(documentController) {
       return this.getCurrentStep();
     }
 
+    /**
+     * Sets the current step to the next step and returns it.
+     *
+     */
+    //=============================================================================
     this.getNextStep = function getNextStep(){
       if (this.currentStepIndex <= this.getCurrentTour().extendedDocs.length){
           this.currentStepIndex ++;
@@ -141,27 +147,39 @@ export function GuidedTourController(documentController) {
 
 
     /**
-    * Reset browser at the begining of documents list
+    * Reset guided tour overview when user quits / ends tour
     */
     //=============================================================================
     this.reset = function reset(){
-      this.currentStepIndex =1;
-      this.currentTourIndex = 0;
+
+      this.currentTourIndex = 0; //first tour
+      this.currentStepIndex =0; //first step
       this.currentGuidedTour = this.guidedTours[this.currentTourIndex];
       this.guidedTour.currentStep = this.getCurrentStep();
       this.documentController.documentBrowser.activateWindow(false);
       this.documentController.documentBrowser.closeDocFull();
       this.guidedTour.previewTour();
-      //this.toggleGuidedTourButtons(true);
+
     }
 
+    /**
+    * Display or hide buttons
+    */
+    //=============================================================================
     this.toggleGuidedTourButtons = function toggleGuidedTourButtons(active){
-        document.getElementById("guidedTourPreviousTourButton").style.display = active ? "block" : "none";
-        document.getElementById("guidedTourNextTourButton").style.display = active ? "block" : "none";
-        document.getElementById("guidedTourPreviousStepButton").style.display = active ? "none" : "block";
-        document.getElementById("guidedTourNextStepButton").style.display = active ? "none" : "block";
-        document.getElementById('guidedTourStartButton').style.display = active ? "block" : "none";
-        document.getElementById("guidedTourExitButton").style.display = active ? "none":"block";
+
+      document.getElementById("guidedTourPreviousTourButton").style.display =
+                                                      active ? "block" : "none";
+      document.getElementById("guidedTourNextTourButton").style.display =
+                                                      active ? "block" : "none";
+      document.getElementById("guidedTourPreviousStepButton").style.display =
+                                                      active ? "none" : "block";
+      document.getElementById("guidedTourNextStepButton").style.display =
+                                                      active ? "none" : "block";
+      document.getElementById('guidedTourStartButton').style.display =
+                                                      active ? "block" : "none";
+      document.getElementById("guidedTourExitButton").style.display =
+                                                        active ? "none":"block";
 
     }
 
