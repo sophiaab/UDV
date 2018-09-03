@@ -113,14 +113,17 @@ export function DocumentController(view, controls, options = {},config)
           var stick = new THREE.Mesh(objGeometry.clone(), mat);
 
           stick.name = "stick";
-          stick.position.y=5174795;
-          stick.position.x=    1841569;
+          stick.position.y=5174794.730020057;
+          stick.position.x=    1841564.952802262;
           stick.position.z=    626;
           stick.scale.set(0.7,80,100);
          stick.quaternion.set(0,0,1);
           stick.updateMatrixWorld();
           this.view.scene.add(stick);
           this.view.notifyChange(true);
+
+
+
     }
 
     /**

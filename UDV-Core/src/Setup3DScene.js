@@ -131,6 +131,34 @@ var ambientLight = new THREE.AmbientLight( 0xffffff,0.5 );
 ambientLight.position.set(0, 0, 3000 );
 directionalLight.updateMatrixWorld();
 view.scene.add( ambientLight );
+var objGeometry = new THREE.PlaneGeometry(12,10);
+var mat = new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, color: 0xffffff } );
+var stick = new THREE.Mesh(objGeometry.clone(), mat);
+
+stick.name = "plan";
+stick.position.y=5174795;
+stick.position.x=    1841569;
+stick.position.z=    0;
+stick.scale.set(800,800,100);
+stick.quaternion.set(1,0,0,0);
+stick.updateMatrixWorld();
+view.scene.add(stick);
+view.notifyChange(true);
+
+/*
+
+var mat = new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, color: 0xffffff } );
+      var objGeometry = new THREE.PlaneGeometry(12,10);
+        var plan = new THREE.Mesh(objGeometry.clone(), mat);
+        plan.name = "plan";
+        plan.position.y= 0;
+        plan.position.x=    0;
+        plan.position.z=    100;
+        plan.quaternion.set(0, 0,1);
+        plan.scale.set(1000,1000,100)
+        plan.updateMatrixWorld();
+        view.scene.add(plan);
+        view.notifyChange(true);*/
 
 return [ view, extent ];
 

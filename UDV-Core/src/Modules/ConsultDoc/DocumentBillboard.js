@@ -164,6 +164,7 @@ console.log(intersects)
 
 this.onMouseClick = function onMouseClick(event){
 
+
         var mouse = new THREE.Vector2();
 
         var raycaster = new THREE.Raycaster();
@@ -175,7 +176,8 @@ this.onMouseClick = function onMouseClick(event){
       console.log('y', event.clientY, - ( event.clientY / window.innerHeight ) * 2 + 1)
         raycaster.setFromCamera( mouse, this.documentController.view.camera.camera3D );
         // we could optimize here, parse the scene first and get the children which are billboards, then intersects
-        var intersects = raycaster.intersectObjects( this.documentController.view.scene.children );
+        var intersects = raycaster.intersectObject( this.documentController.view.scene.children[3] );
+        console.log(intersects);
 if(intersects.length > 0){
   console.log(intersects[0].point )
         var closest = intersects[0].object;
@@ -217,6 +219,7 @@ if(intersects.length > 0){
     // this.documentController.createAleatoryBillboards();
     // var t1 = performance.now();
     // console.log(t1 - t0);
+
     this.documentController.view.scene.children.forEach((elem) => {
       if(elem.name == "billboard"){
           this.billboards.push(elem);}
