@@ -177,15 +177,9 @@ this.onMouseClick = function onMouseClick(event){
         raycaster.setFromCamera( mouse, this.documentController.view.camera.camera3D );
         // we could optimize here, parse the scene first and get the children which are billboards, then intersects
         var intersects = raycaster.intersectObject( this.documentController.view.scene.children[3] );
-        console.log(intersects);
-if(intersects.length > 0){
-  console.log(intersects[0].point )
-        var closest = intersects[0].object;
-        var dist = closest.position.distanceTo(this.documentController.view.camera.camera3D.position);
-
-        this.documentController.view.scene.children[3].position.z += 500;
-        this.documentController.view.scene.children[3].updateMatrixWorld();
-            this.documentController.view.notifyChange(true);}
+        if(intersects.length > 0){
+          this.documentController.documentBrowser.focusOnDoc();
+        }
 };
 
 

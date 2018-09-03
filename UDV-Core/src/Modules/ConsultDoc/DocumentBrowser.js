@@ -239,6 +239,11 @@ export function DocumentBrowser(browserContainer, documentController) {
     // and initiate the animated travel to orient the camera
     //=============================================================================
     this.focusOnDoc = function focusOnDoc() {
+      this.documentController.view.scene.children[3].visible = false;
+      this.documentController.view.scene.children[4].visible = false;
+
+      this.currentMetadata = this.documentController.setOfDocuments[10].metaData;
+      this.currentDoc = this.documentController.setOfDocuments[10];
       document.getElementById('docFull').style.display = "block";
       document.getElementById('docFullImg').src = this.documentController.url
                           + this.documentController.serverModel.documentsRepository

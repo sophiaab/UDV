@@ -97,7 +97,7 @@ export function DocumentController(view, controls, options = {},config)
       console.log(this.setOfDocuments);
       var object, material;
       var objGeometry = new THREE.PlaneGeometry(12,10);
-          var texture = new THREE.TextureLoader().load(this.url + "getFile/" +  this.setOfDocuments[13].metaData.link);
+          var texture = new THREE.TextureLoader().load(this.url + "getFile/" +  this.setOfDocuments[10].metaData.link);
           material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
           object = new THREE.Mesh(objGeometry.clone(), material);
           object.name = "billboard";
