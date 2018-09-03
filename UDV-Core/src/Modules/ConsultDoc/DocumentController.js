@@ -8,6 +8,7 @@
 
 import { DocumentResearch }  from './DocumentResearch.js';
 import { DocumentBrowser }   from './DocumentBrowser.js';
+import { DocumentBillboard }   from './DocumentBillboard.js';
 import './ConsultDoc.css';
 
 /**
@@ -57,7 +58,7 @@ export function DocumentController(view, controls, options = {},config)
         document.body.appendChild(browserContainer);
         this.documentBrowser = new DocumentBrowser(browserContainer, this);
 
-        //this.documentBillboard = new DocumentBillboard(this); //in process
+        this.documentBillboard = new DocumentBillboard(this); //in process
     }
 
     /**
@@ -93,6 +94,33 @@ export function DocumentController(view, controls, options = {},config)
       this.setOfDocuments = JSON.parse(req.responseText);
       this.documentBrowser.numberDocs = this.setOfDocuments.length;
       this.reset();
+      console.log(this.setOfDocuments);
+      var object, material;
+      var objGeometry = new THREE.PlaneGeometry(12,10);
+          var texture = new THREE.TextureLoader().load(this.url + "getFile/" +  this.setOfDocuments[13].metaData.link);
+          material = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
+          object = new THREE.Mesh(objGeometry.clone(), material);
+          object.name = "billboard";
+          object.scale.set(50,50,50);
+          object.quaternion.copy( this.view.camera.camera3D.quaternion );//face camera when created. Theb
+          object.position.y=5174795;
+          object.position.x=    1841569.31016107184156;
+          object.position.z=    800;
+          object.updateMatrixWorld();
+          this.view.scene.add(object);
+
+                  var mat = new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, color: 0xffffff } );
+          var stick = new THREE.Mesh(objGeometry.clone(), mat);
+
+          stick.name = "stick";
+          stick.position.y=5174795;
+          stick.position.x=    1841569;
+          stick.position.z=    626;
+          stick.scale.set(0.7,80,100);
+         stick.quaternion.set(0,0,1);
+          stick.updateMatrixWorld();
+          this.view.scene.add(stick);
+          this.view.notifyChange(true);
     }
 
     /**
