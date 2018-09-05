@@ -249,6 +249,8 @@ export function ContributeController(documentController){
     var currentDoc = this.documentController.getCurrentDoc();
     var id = currentDoc.metaData['id'];
 
+    this.documentController.documentBrowser.resetResearch();
+
     //new promise
     var newDocUpdate = new Promise((resolve, reject) => {
 
